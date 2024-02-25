@@ -1,20 +1,22 @@
-package com.iteratrlearning.shu_book.chapter_03;
+package com.iteratrlearning.shu_book.chapter_03.C;
+
+import com.iteratrlearning.shu_book.chapter_03.B.BankTransactionFilter;
+import com.iteratrlearning.shu_book.chapter_03.common.BankTransaction;
 
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
-public class BankStatementProcessor {
+public class BankStatementProcessorV3 {
 
     private final List<BankTransaction> bankTransactions;
 
-    public BankStatementProcessor(final List<BankTransaction> bankTransactions) {
+    public BankStatementProcessorV3(final List<BankTransaction> bankTransactions) {
         this.bankTransactions = bankTransactions;
     }
 
     public SummaryStatistics summarizeTransactions() {
-
         final DoubleSummaryStatistics doubleSummaryStatistics = bankTransactions.stream()
                 .mapToDouble(BankTransaction::getAmount)
                 .summaryStatistics();

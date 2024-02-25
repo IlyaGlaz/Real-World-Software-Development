@@ -1,8 +1,13 @@
-package com.iteratrlearning.shu_book.chapter_02;
+package com.iteratrlearning.shu_book.chapter_02.C;
+
+import com.iteratrlearning.shu_book.chapter_02.B.BankTransaction;
 
 import java.time.Month;
 import java.util.List;
 
+/**
+ * Класс для вычисления статистики по банковским операциям
+ */
 public class BankStatementProcessor {
     private final List<BankTransaction> bankTransactions;
 

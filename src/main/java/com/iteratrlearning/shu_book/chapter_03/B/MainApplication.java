@@ -1,4 +1,4 @@
-package com.iteratrlearning.shu_book.chapter_03;
+package com.iteratrlearning.shu_book.chapter_03.B;
 
 import com.iteratrlearning.shu_book.chapter_03.C.Exporter;
 import com.iteratrlearning.shu_book.chapter_03.C.HtmlExporter;
@@ -17,6 +17,6 @@ public class MainApplication {
 
         final Exporter exporter = new HtmlExporter();
 
-        bankStatementAnalyzer.analyze("bank-data-simple.csv", bankStatementParser, exporter);
+        bankStatementAnalyzer.analyze("bank-data-simple.csv", bankStatementParser);
     }
 }

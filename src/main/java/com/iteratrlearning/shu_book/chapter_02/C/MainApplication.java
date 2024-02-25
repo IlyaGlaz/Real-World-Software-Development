@@ -1,4 +1,7 @@
-package com.iteratrlearning.shu_book.chapter_02;
+package com.iteratrlearning.shu_book.chapter_02.C;
+
+import com.iteratrlearning.shu_book.chapter_02.B.BankStatementCSVParser;
+import com.iteratrlearning.shu_book.chapter_02.B.BankStatementParser;
 
 public class MainApplication {
 
@@ -11,6 +14,5 @@ public class MainApplication {
                 = new BankStatementCSVParser();
 
         bankStatementAnalyzer.analyze("bank-data-simple.csv", bankStatementParser);
-
     }
 }

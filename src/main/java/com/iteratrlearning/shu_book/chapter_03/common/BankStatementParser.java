@@ -1,4 +1,4 @@
-package com.iteratrlearning.shu_book.chapter_02;
+package com.iteratrlearning.shu_book.chapter_03.common;
 
 import java.util.List;
 

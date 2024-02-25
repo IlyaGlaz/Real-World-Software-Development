@@ -2,8 +2,8 @@ package com.iteratrlearning.shu_book.chapter_06;
 
 import com.iteratrlearning.shu_book.chapter_06.in_memory.InMemoryTwootRepository;
 import com.iteratrlearning.shu_book.chapter_06.in_memory.InMemoryUserRepository;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
@@ -11,11 +11,16 @@ import static com.iteratrlearning.shu_book.chapter_06.FollowStatus.ALREADY_FOLLO
 import static com.iteratrlearning.shu_book.chapter_06.FollowStatus.SUCCESS;
 import static com.iteratrlearning.shu_book.chapter_06.TestData.TWOOT;
 import static com.iteratrlearning.shu_book.chapter_06.TestData.twootAt;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
-public class  TwootrTest
-{
+public class TwootrTest {
 
     private static final Position POSITION_1 = new Position(0);
 
@@ -29,9 +34,8 @@ public class  TwootrTest
     private Twootr twootr;
     private SenderEndPoint endPoint;
 
-    @Before
-    public void setUp()
-    {
+    @BeforeEach
+    public void setUp() {
         twootr = new Twootr(userRepository, twootRepository);
 
         assertEquals(RegistrationStatus.SUCCESS, twootr.onRegisterUser(TestData.USER_ID, TestData.PASSWORD));
@@ -39,23 +43,20 @@ public class  TwootrTest
     }
 
     @Test
-    public void shouldNotRegisterDuplicateUsers()
-    {
+    public void shouldNotRegisterDuplicateUsers() {
         assertEquals(RegistrationStatus.DUPLICATE, twootr.onRegisterUser(TestData.USER_ID, TestData.PASSWORD));
     }
 
     @Test
-    public void shouldBeAbleToAuthenticateUser()
-    {
+    public void shouldBeAbleToAuthenticateUser() {
         logon();
     }
 
     // tag::shouldNotAuthenticateUserWithWrongPassword[]
     @Test
-    public void shouldNotAuthenticateUserWithWrongPassword()
-    {
+    public void shouldNotAuthenticateUserWithWrongPassword() {
         final Optional<SenderEndPoint> endPoint = twootr.onLogon(
-            TestData.USER_ID, "bad password", receiverEndPoint);
+                TestData.USER_ID, "bad password", receiverEndPoint);
 
         assertFalse(endPoint.isPresent());
     }
@@ -63,18 +64,16 @@ public class  TwootrTest
 
 
     @Test
-    public void shouldNotAuthenticateUnknownUser()
-    {
+    public void shouldNotAuthenticateUnknownUser() {
         final Optional<SenderEndPoint> endPoint = twootr.onLogon(
-            TestData.NOT_A_USER, TestData.PASSWORD, receiverEndPoint);
+                TestData.NOT_A_USER, TestData.PASSWORD, receiverEndPoint);
 
         assertFalse(endPoint.isPresent());
     }
 
     // tag::shouldFollowValidUser[]
     @Test
-    public void shouldFollowValidUser()
-    {
+    public void shouldFollowValidUser() {
         logon();
 
         final FollowStatus followStatus = endPoint.onFollow(TestData.OTHER_USER_ID);
@@ -85,8 +84,7 @@ public class  TwootrTest
 
     // tag::shouldNotDuplicateFollowValidUser[]
     @Test
-    public void shouldNotDuplicateFollowValidUser()
-    {
+    public void shouldNotDuplicateFollowValidUser() {
         logon();
 
         endPoint.onFollow(TestData.OTHER_USER_ID);
@@ -97,8 +95,7 @@ public class  TwootrTest
     // end::shouldNotDuplicateFollowValidUser[]
 
     @Test
-    public void shouldNotFollowInValidUser()
-    {
+    public void shouldNotFollowInValidUser() {
         logon();
 
         final FollowStatus followStatus = endPoint.onFollow(TestData.NOT_A_USER);
@@ -108,8 +105,7 @@ public class  TwootrTest
 
     // tag::shouldReceiveTwootsFromFollowedUser[]
     @Test
-    public void shouldReceiveTwootsFromFollowedUser()
-    {
+    public void shouldReceiveTwootsFromFollowedUser() {
         final String id = "1";
 
         logon();
@@ -125,8 +121,7 @@ public class  TwootrTest
     // end::shouldReceiveTwootsFromFollowedUser[]
 
     @Test
-    public void shouldNotReceiveTwootsAfterLogoff()
-    {
+    public void shouldNotReceiveTwootsAfterLogoff() {
         final String id = "1";
 
         userFollowsOtherUser();
@@ -139,8 +134,7 @@ public class  TwootrTest
 
     // tag::shouldReceiveReplayOfTwootsAfterLogoff[]
     @Test
-    public void shouldReceiveReplayOfTwootsAfterLogoff()
-    {
+    public void shouldReceiveReplayOfTwootsAfterLogoff() {
         final String id = "1";
 
         userFollowsOtherUser();
@@ -155,8 +149,7 @@ public class  TwootrTest
     // end::shouldReceiveReplayOfTwootsAfterLogoff[]
 
     @Test
-    public void shouldDeleteTwoots()
-    {
+    public void shouldDeleteTwoots() {
         final String id = "1";
 
         userFollowsOtherUser();
@@ -172,8 +165,7 @@ public class  TwootrTest
     }
 
     @Test
-    public void shouldNotDeleteFuturePositionTwoots()
-    {
+    public void shouldNotDeleteFuturePositionTwoots() {
         logon();
 
         final DeleteStatus status = endPoint.onDeleteTwoot("DAS");
@@ -182,8 +174,7 @@ public class  TwootrTest
     }
 
     @Test
-    public void shouldNotOtherUsersTwoots()
-    {
+    public void shouldNotOtherUsersTwoots() {
         final String id = "1";
 
         logon();
@@ -197,13 +188,11 @@ public class  TwootrTest
         assertEquals(DeleteStatus.NOT_YOUR_TWOOT, status);
     }
 
-    private SenderEndPoint otherLogon()
-    {
+    private SenderEndPoint otherLogon() {
         return logon(TestData.OTHER_USER_ID, mock(ReceiverEndPoint.class));
     }
 
-    private void userFollowsOtherUser()
-    {
+    private void userFollowsOtherUser() {
         logon();
 
         endPoint.onFollow(TestData.OTHER_USER_ID);
@@ -211,16 +200,13 @@ public class  TwootrTest
         endPoint.onLogoff();
     }
 
-    private void logon()
-    {
+    private void logon() {
         this.endPoint = logon(TestData.USER_ID, receiverEndPoint);
     }
 
-    private SenderEndPoint logon(final String userId, final ReceiverEndPoint receiverEndPoint)
-    {
+    private SenderEndPoint logon(final String userId, final ReceiverEndPoint receiverEndPoint) {
         final Optional<SenderEndPoint> endPoint = twootr.onLogon(userId, TestData.PASSWORD, receiverEndPoint);
-        assertTrue("Failed to logon", endPoint.isPresent());
+        assertTrue(endPoint.isPresent());
         return endPoint.get();
     }
-
 }

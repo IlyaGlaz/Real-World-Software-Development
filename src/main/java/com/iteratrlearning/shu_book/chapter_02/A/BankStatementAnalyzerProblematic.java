@@ -1,4 +1,4 @@
-package com.iteratrlearning.shu_book.chapter_02;
+package com.iteratrlearning.shu_book.chapter_02.A;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,8 +9,11 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Проблема, когда надо написать логику для другого вида операций.
+ * Например - вычислить сумму транзакций за январь.
+ */
 public class BankStatementAnalyzerProblematic {
-
     private static final String RESOURCES = "src/main/resources/";
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -39,6 +42,5 @@ public class BankStatementAnalyzerProblematic {
         }
 
         System.out.println("The total for all transactions in January is " + total);
-
     }
 }

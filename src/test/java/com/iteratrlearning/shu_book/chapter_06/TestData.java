@@ -1,9 +1,5 @@
 package com.iteratrlearning.shu_book.chapter_06;
 
-import java.nio.charset.StandardCharsets;
-
-import static java.nio.charset.StandardCharsets.UTF_16;
-
 class TestData
 {
     static final String USER_ID = "Joe";

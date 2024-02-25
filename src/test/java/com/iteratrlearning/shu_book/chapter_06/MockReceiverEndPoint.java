@@ -3,8 +3,8 @@ package com.iteratrlearning.shu_book.chapter_06;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
-import static org.junit.Assert.assertThat;
 
 // tag::mockReceiverEndPoint[]
 public class MockReceiverEndPoint implements ReceiverEndPoint

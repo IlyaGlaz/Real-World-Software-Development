@@ -1,4 +1,4 @@
-package com.iteratrlearning.shu_book.chapter_02;
+package com.iteratrlearning.shu_book.chapter_02.B;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,15 +7,17 @@ import java.time.Month;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BankStatementAnalyzerSRP {
-
+/**
+ * Использование CSV-парсера (Плохая связность)
+ */
+public class BankStatementAnalyzerSimple {
     private static final String RESOURCES = "src/main/resources/";
 
     public static void main(final String[] args) throws Exception {
 
         final BankStatementCSVParser bankStatementParser = new BankStatementCSVParser();
 
-        final Path path = Paths.get(RESOURCES + args[0]);
+        final Path path = Paths.get(RESOURCES + "bank-data-simple.csv");
         final List<String> lines = Files.readAllLines(path);
 
         final List<BankTransaction> bankTransactions = bankStatementParser.parseLinesFrom(lines);

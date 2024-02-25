@@ -1,4 +1,7 @@
-package com.iteratrlearning.shu_book.chapter_02;
+package com.iteratrlearning.shu_book.chapter_02.C;
+
+import com.iteratrlearning.shu_book.chapter_02.B.BankStatementParser;
+import com.iteratrlearning.shu_book.chapter_02.B.BankTransaction;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -6,7 +9,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Month;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BankStatementAnalyzer {
     private static final String RESOURCES = "src/main/resources/";
@@ -21,7 +23,6 @@ public class BankStatementAnalyzer {
         final BankStatementProcessor bankStatementProcessor = new BankStatementProcessor(bankTransactions);
 
         collectSummary(bankStatementProcessor);
-
     }
 
     private static void collectSummary(final BankStatementProcessor bankStatementProcessor) {

@@ -1,4 +1,6 @@
-package com.iteratrlearning.shu_book.chapter_02;
+package com.iteratrlearning.shu_book.chapter_02.D;
+
+import com.iteratrlearning.shu_book.chapter_02.B.BankTransaction;
 
 import java.time.LocalDate;
 

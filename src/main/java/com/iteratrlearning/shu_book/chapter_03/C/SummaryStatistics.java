@@ -1,4 +1,4 @@
-package com.iteratrlearning.shu_book.chapter_03;
+package com.iteratrlearning.shu_book.chapter_03.C;
 
 public class SummaryStatistics {
     private final double sum;

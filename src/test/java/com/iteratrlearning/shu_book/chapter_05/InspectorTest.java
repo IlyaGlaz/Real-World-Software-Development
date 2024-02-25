@@ -1,10 +1,9 @@
 package com.iteratrlearning.shu_book.chapter_05;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InspectorTest {
 
@@ -20,8 +19,6 @@ public class InspectorTest {
 
         assertEquals(1, diagnosisList.size());
         assertEquals(true, diagnosisList.get(0).isPositive());
-
-
     }
 
     private static class JobTitleCondition implements ConditionalAction {

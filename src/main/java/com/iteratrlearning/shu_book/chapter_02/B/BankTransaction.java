@@ -1,8 +1,11 @@
-package com.iteratrlearning.shu_book.chapter_03;
+package com.iteratrlearning.shu_book.chapter_02.B;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Доменный класс для банковских операций
+ */
 public class BankTransaction {
     private final LocalDate date;
     private final double amount;
@@ -50,6 +53,4 @@ public class BankTransaction {
     public int hashCode() {
         return Objects.hash(date, amount, description);
     }
-
-
 }

@@ -1,4 +1,4 @@
-package com.iteratrlearning.shu_book.chapter_02;
+package com.iteratrlearning.shu_book.chapter_02.B;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -6,8 +6,10 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * Перемещение алгоритма парсинга в отдельный класс
+ */
 public class BankStatementCSVParser implements BankStatementParser {
-
     private static final DateTimeFormatter DATE_PATTERN = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public BankTransaction parseFrom(final String line) {
