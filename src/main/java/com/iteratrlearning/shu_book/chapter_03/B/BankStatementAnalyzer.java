@@ -14,13 +14,15 @@ public class BankStatementAnalyzer {
 
     public void analyze(final String fileName,
                         final BankStatementParser bankStatementParser) throws IOException {
-
+        /** ---------------------------------------------------------------- */
         final Path path = Paths.get(RESOURCES + fileName);
         final List<String> lines = Files.readAllLines(path);
+        /** ---------------------------------------------------------------- */
 
+        /** ---------------------------------------------------------------- */
         final List<BankTransaction> bankTransactions = bankStatementParser.parseLinesFrom(lines);
-
         final BankStatementProcessorV2 bankStatementProcessorV2 = new BankStatementProcessorV2(bankTransactions);
+        /** ---------------------------------------------------------------- */
 
         List<BankTransaction> transactions =
                 bankStatementProcessorV2.findTransactions(bunkTransaction -> bunkTransaction.getAmount() > 1000);

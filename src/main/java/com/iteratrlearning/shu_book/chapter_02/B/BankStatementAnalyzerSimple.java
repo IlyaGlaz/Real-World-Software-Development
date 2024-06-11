@@ -14,16 +14,20 @@ public class BankStatementAnalyzerSimple {
     private static final String RESOURCES = "src/main/resources/";
 
     public static void main(final String[] args) throws Exception {
-
-        final BankStatementCSVParser bankStatementParser = new BankStatementCSVParser();
-
+        /** ---------------------------------------------------------------- */
         final Path path = Paths.get(RESOURCES + "bank-data-simple.csv");
         final List<String> lines = Files.readAllLines(path);
+        /** ---------------------------------------------------------------- */
 
+        /** ---------------------------------------------------------------- */
+        final BankStatementCSVParser bankStatementParser = new BankStatementCSVParser();
         final List<BankTransaction> bankTransactions = bankStatementParser.parseLinesFrom(lines);
+        /** ---------------------------------------------------------------- */
 
+        /** ---------------------------------------------------------------- */
         System.out.println("The total for all transactions is " + calculateTotalAmount(bankTransactions));
         System.out.println("Transactions in January " + selectInMonth(bankTransactions, Month.JANUARY));
+        /** ---------------------------------------------------------------- */
     }
 
     private static double calculateTotalAmount(final List<BankTransaction> bankTransactions) {
